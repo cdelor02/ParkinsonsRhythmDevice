@@ -1,4 +1,4 @@
-//Prototype code for Parkinson's rythym device, BME 66
+/*Prototype code for Parkinson's rythym device, BME 66
 //Version 1.0 March 2019
 //Charlie DeLorey
 
@@ -31,3 +31,46 @@ void pinHertz(int freq, int led) {
   digitalWrite(led, LOW);
   delay(freq * 1000);
 }
+*/
+
+
+//VERSION 1.2, just making an LED blink
+const int led = 7;
+const int buttonPin = 2; //0 for the attachInterrupt (3 is 1)
+volatile int buttonState = 0;
+
+void setup()
+{
+  pinMode(led, OUTPUT);
+  pinMode(buttonPin, INPUT);
+  Serial.begin(9600);
+  //attachInterrupt(0, ledHold, CHANGE);
+}
+
+
+void loop() 
+{ 
+  buttonState = digitalRead(buttonPin);
+  if (buttonState == HIGH) {
+    digitalWrite(led, HIGH);
+    Serial.println("SUPER HIGH");
+    delay(5000);
+    digitalWrite(led, LOW);
+  }
+  else {
+  digitalWrite(led, HIGH);
+  Serial.println("HIGH");
+  delay(1000);
+  digitalWrite(led, LOW);
+  Serial.println("LOW");
+  delay(1000);
+  }
+  
+} 
+/*
+void ledHold() {
+ digitalWrite(led, HIGH);
+ delay(10000);
+ digitalWrite(led, LOW);
+}
+*/
